@@ -1,0 +1,49 @@
+{
+  "version": "0.1.0",
+  "updatedAt": "2026-08-10",
+  "skills": [
+    {
+      "id": "browser-runtime-inspection",
+      "name": "TRAE Browser Runtime Inspection",
+      "package": "TRAE-browseruse",
+      "qualityTier": "recommended",
+      "roles": [
+        "browser-performance-engineer",
+        "loading-performance-specialist"
+      ],
+      "keywords": [
+        "browser",
+        "performance",
+        "trace",
+        "network",
+        "web-vitals",
+        "runtime"
+      ],
+      "useWhen": [
+        "需要访问目标 URL、执行只读用户旅程并采集浏览器运行时证据。",
+        "需要复现加载、交互、网络、渲染或内存性能问题。"
+      ]
+    },
+    {
+      "id": "implementation-delivery-team",
+      "name": "AI Work Team",
+      "package": "ai-work-team",
+      "qualityTier": "recommended",
+      "roles": [
+        "performance-lead",
+        "performance-solution-architect"
+      ],
+      "keywords": [
+        "implementation",
+        "frontend",
+        "engineering",
+        "qa",
+        "delivery"
+      ],
+      "useWhen": [
+        "用户已批准依据性能分析报告进入代码实现、测试和发布准备。",
+        "需要把 implementation-handoff 转成研发交付工作流。"
+      ]
+    }
+  ]
+}

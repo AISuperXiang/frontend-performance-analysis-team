@@ -1,0 +1,845 @@
+{
+  "generator": "ai-team-build",
+  "generatedAt": "2026-08-10T10:14:52.098Z",
+  "specSource": "<skills-root>/ai-team-build/examples/frontend-performance-analysis-team.team-spec.json",
+  "outputPath": "<skills-root>/frontend-performance-analysis-team",
+  "dryRun": false,
+  "skill": {
+    "id": "frontend-performance-analysis-team",
+    "name": "Frontend Performance Analysis Team",
+    "description": "前端应用性能诊断、归因、方案设计与实施交接专家团队。",
+    "version": "0.1.0",
+    "domain": "前端应用性能分析与优化决策",
+    "targetUsers": [
+      "需要诊断 Web 前端启动、加载、渲染、交互、内存或稳定性性能问题的研发团队",
+      "需要结合代码静态分析、浏览器实测和性能指标制定优化方案的技术负责人",
+      "需要在实施前明确性能方案影响范围、优先级、落地节奏和验证口径的项目团队"
+    ],
+    "primaryValue": "以静态代码、可重复浏览器测量和现场指标的三角证据准确刻画性能现状，追踪根因，给出带上下文影响范围、优先级和落地节奏的最适合方案，并形成可由 ai-work-team 执行的实施交接包。"
+  },
+  "commandFile": "commands/perf-team.md",
+  "counts": {
+    "members": 8,
+    "workflows": 5,
+    "commands": 5,
+    "templates": 11,
+    "externalSkills": 2,
+    "acceptanceScenarios": 5,
+    "dataContracts": 5,
+    "capabilities": 8,
+    "externalAdapters": 2
+  },
+  "evaluation": {
+    "totalScore": 100,
+    "grade": "A",
+    "gradeScore": 100,
+    "gradeBlockers": [],
+    "reportPath": "evaluation-report.md",
+    "decisionAdvice": "可作为高质量团队蓝图交付；业务能力初始为 V0，必须执行代表性任务后再提升验证等级。",
+    "upgradeOpportunityCount": 0
+  },
+  "riskControls": {
+    "domainRiskLevel": "medium",
+    "requiredDisclaimers": [
+      "性能结论仅适用于报告记录的代码版本、用户旅程、运行环境、数据窗口和测量条件。",
+      "实验室测量不等同真实用户表现；缺少现场数据时必须明确标记为实验室结论。",
+      "本团队只交付分析、方案和落地节奏，不直接执行代码、配置或生产环境变更。"
+    ],
+    "blockedClaims": [
+      "不得在没有真实浏览器证据时声称运行时性能已验证。",
+      "不得把单次采样、综合评分、静态代码气味或现场相关性写成确定性根因。",
+      "不得承诺未经实施、复测和现场观测的确定性性能收益或交付工期。",
+      "不得在未获用户批准时调用 ai-work-team 修改代码或触发生产副作用。"
+    ],
+    "evidenceRules": [
+      "所有性能结论必须关联来源、版本、环境、时间、指标单位、适用范围和证据 ID。",
+      "P0/P1 根因必须包含支持证据、反向证据、替代解释、置信度和失效条件。",
+      "浏览器对比必须记录缓存、网络、CPU、设备、浏览器、数据状态和重复次数。",
+      "现场指标必须记录口径、窗口、样本量、分位数、版本和关键分群。",
+      "所有推荐方案必须映射根因，并包含上下文影响范围、验证方式、回归面、停止和回滚条件。"
+    ],
+    "humanReview": {
+      "required": false,
+      "accountableRole": "",
+      "requiredWhen": [],
+      "blockedWithoutApproval": false
+    }
+  },
+  "teamDesign": {
+    "problemStatement": "前端性能问题常被单一 Lighthouse 分数、局部代码直觉或一次性浏览器结果误导，导致根因不清、方案副作用未知、优化收益无法验证，且分析结论与后续研发实施之间缺少完整上下文。",
+    "mission": "建立从场景建模、静态扫描、浏览器受控测量、现场指标分群、根因归因到方案决策和实施交接的证据闭环，只交付分析报告、解决方案与落地节奏，不直接修改业务代码。",
+    "targetOutcomes": [
+      "性能现状同时说明用户旅程、代码版本、运行环境、测量方法、指标基线和证据边界。",
+      "每个主要性能问题都能从指标或浏览器现象追踪到代码、资源、依赖、渲染阶段或运行环境假设。",
+      "每个优化方案都包含预期收益、适用前提、影响范围、副作用、回归面、验证方式和失效条件。",
+      "落地路线图按价值、置信度、成本、风险、依赖和可逆性排序，并可直接交接给 ai-work-team 执行。",
+      "浏览器、现场数据或源码不可用时明确降级结论，不用推理替代实测。"
+    ],
+    "stakeholders": [
+      "性能问题提出者与业务负责人",
+      "前端技术负责人和应用架构师",
+      "前端、服务端、基础设施与监控团队",
+      "QA、发布负责人和最终验收人",
+      "负责后续实现的 ai-work-team"
+    ],
+    "constraints": [
+      "团队只负责分析、方案、影响范围和落地节奏，不直接修改业务代码、配置或线上环境。",
+      "浏览器访问、认证页面、生产数据或外部监控系统必须遵守用户授权和数据最小化原则。",
+      "实验室数据、现场数据和静态推断必须分开标记，不得混合成无来源结论。",
+      "测量环境、代码版本、缓存状态、网络与 CPU 条件、浏览器版本和重复次数必须可追踪。",
+      "方案优先复用目标项目既有架构、构建链路、监控体系和发布机制。",
+      "后续实施必须经用户确认后交给 ai-work-team，不在本团队工作流内自动执行。"
+    ],
+    "nonGoals": [
+      "不直接实现、重构或提交性能优化代码。",
+      "不把综合评分或单次采样当作真实用户性能结论。",
+      "不为缺少证据的收益、工期或指标改善做确定性承诺。",
+      "不替代安全、后端容量、数据库或基础设施专项团队的深度审计。",
+      "不默认安装外部 Skill、登录系统或触发具有副作用的浏览器操作。"
+    ],
+    "assumptions": [
+      "用户能够提供项目路径、目标 URL、关键用户旅程或其中至少一项。",
+      "目标项目可通过静态阅读识别入口、构建配置、依赖、路由和关键渲染链路。",
+      "浏览器实测能力可能受认证、网络、环境和工具可用性限制，限制会进入证据边界。",
+      "现场 RUM 或业务指标不是每个场景都可获得，缺失时只能交付实验室与静态结论。",
+      "后续实现团队会依据实施交接包重新确认代码现状、变更计划和测试范围。"
+    ],
+    "valueMetrics": [
+      {
+        "name": "性能证据覆盖率",
+        "baseline": "首轮任务按静态、实验室、现场三类证据盘点",
+        "target": "所有核心结论至少关联一种直接证据；完整评估同时覆盖静态分析和受控浏览器实测，现场数据缺失时明确标记",
+        "evidenceSource": "evidence-index、static-analysis-findings、runtime-profile-findings 和 metrics-baseline",
+        "reviewCadence": "每次分析交付"
+      },
+      {
+        "name": "根因可追踪率",
+        "baseline": "首轮任务统计问题到证据与代码位置的映射",
+        "target": "所有 P0/P1 性能问题均能关联指标、证据 ID、受影响链路、代码或资源位置及置信度",
+        "evidenceSource": "root-cause-map 和 performance-analysis-report",
+        "reviewCadence": "每次根因评审"
+      },
+      {
+        "name": "方案影响范围完整率",
+        "baseline": "首轮任务按模板检查",
+        "target": "所有推荐方案均覆盖代码模块、运行时路径、用户群、指标、依赖、回归面、发布与回滚影响",
+        "evidenceSource": "impact-scope-matrix 和 optimization-solution",
+        "reviewCadence": "每次方案评审"
+      },
+      {
+        "name": "实施交接可执行率",
+        "baseline": "首轮与 ai-work-team 交接后评估补充问题数量",
+        "target": "实施团队无需重新推导根因即可拆解任务、验证指标和回归范围",
+        "evidenceSource": "implementation-handoff、rollout-roadmap 和交接反馈",
+        "reviewCadence": "每次实施启动前"
+      }
+    ]
+  },
+  "governance": {
+    "defaultComplexityLevel": "L",
+    "defaultExecutionProfile": "standard",
+    "targetVerificationLevel": "V3",
+    "roleModes": [
+      "active",
+      "consulted",
+      "not_applicable"
+    ],
+    "reassessmentTriggers": [
+      "目标用户旅程、URL、代码版本、构建方式或性能目标发生变化。",
+      "静态分析与浏览器证据冲突，或重复测量方差超过预设容忍范围。",
+      "发现跨端、SSR/CSR 边界、服务端 TTFB、CDN、第三方脚本、内存泄漏或长会话问题。",
+      "浏览器访问受阻、现场数据缺失、认证或隐私边界变化。",
+      "方案影响公共基础设施、共享组件、缓存策略、监控口径或发布机制。",
+      "出现 P0/P1 风险、验证失败或用户要求进入实现阶段。"
+    ],
+    "requiredGates": [
+      "role-activation-gate",
+      "context-gate",
+      "reproducibility-gate",
+      "evidence-gate",
+      "metric-integrity-gate",
+      "attribution-gate",
+      "impact-scope-gate",
+      "solution-fit-gate",
+      "verification-gate",
+      "handoff-gate",
+      "delivery-gate"
+    ],
+    "humanReview": {
+      "required": false,
+      "accountableRole": "",
+      "requiredWhen": [],
+      "blockedWithoutApproval": false
+    }
+  },
+  "teamContract": {
+    "memberIds": [
+      "performance-lead",
+      "source-performance-analyst",
+      "browser-performance-engineer",
+      "rendering-performance-specialist",
+      "loading-performance-specialist",
+      "field-performance-analyst",
+      "performance-solution-architect",
+      "performance-evidence-reviewer"
+    ],
+    "workflows": [
+      {
+        "id": "performance-intake",
+        "candidateMembers": [
+          "performance-lead",
+          "source-performance-analyst",
+          "browser-performance-engineer",
+          "field-performance-analyst"
+        ],
+        "executionMode": "sequential"
+      },
+      {
+        "id": "full-performance-assessment",
+        "candidateMembers": [
+          "performance-lead",
+          "source-performance-analyst",
+          "browser-performance-engineer",
+          "rendering-performance-specialist",
+          "loading-performance-specialist",
+          "field-performance-analyst",
+          "performance-solution-architect",
+          "performance-evidence-reviewer"
+        ],
+        "executionMode": "hybrid"
+      },
+      {
+        "id": "performance-regression-diagnosis",
+        "candidateMembers": [
+          "performance-lead",
+          "source-performance-analyst",
+          "browser-performance-engineer",
+          "rendering-performance-specialist",
+          "loading-performance-specialist",
+          "field-performance-analyst",
+          "performance-evidence-reviewer"
+        ],
+        "executionMode": "hybrid"
+      },
+      {
+        "id": "performance-solution-design",
+        "candidateMembers": [
+          "performance-lead",
+          "source-performance-analyst",
+          "browser-performance-engineer",
+          "rendering-performance-specialist",
+          "loading-performance-specialist",
+          "field-performance-analyst",
+          "performance-solution-architect",
+          "performance-evidence-reviewer"
+        ],
+        "executionMode": "hybrid"
+      },
+      {
+        "id": "performance-analysis-delivery",
+        "candidateMembers": [
+          "performance-lead",
+          "performance-solution-architect",
+          "performance-evidence-reviewer"
+        ],
+        "executionMode": "sequential"
+      }
+    ],
+    "executionProfiles": [
+      "lightweight",
+      "standard",
+      "assurance"
+    ],
+    "verificationLevels": [
+      "V0",
+      "V1",
+      "V2",
+      "V3",
+      "V4"
+    ]
+  },
+  "verification": {
+    "factoryVerificationLevel": "V2",
+    "generatedTeamVerificationLevel": "V0",
+    "targetVerificationLevel": "V3",
+    "boundary": "Factory tests validate generated contracts; they do not validate real domain outcomes."
+  },
+  "acceptanceScenarios": [
+    {
+      "id": "spa-startup-and-interaction-assessment",
+      "input": "用户提供一个 React 或 Vue SPA 项目路径、可访问 URL 和首页到核心操作的旅程，要求分析首屏慢和交互卡顿并给出方案。",
+      "expectedOutputs": [
+        "performance-metrics-baseline.md",
+        "static-analysis-findings.md",
+        "runtime-profile-findings.md",
+        "root-cause-map.md",
+        "impact-scope-matrix.md",
+        "optimization-solution.md",
+        "rollout-roadmap.md",
+        "implementation-handoff.md",
+        "performance-analysis-report.md"
+      ],
+      "mustPassGates": [
+        "context-gate",
+        "reproducibility-gate",
+        "static-analysis-gate",
+        "runtime-evidence-gate",
+        "metric-integrity-gate",
+        "attribution-gate",
+        "impact-scope-gate",
+        "solution-fit-gate",
+        "verification-gate",
+        "handoff-gate",
+        "delivery-gate"
+      ],
+      "failureExamples": [
+        "只给 Lighthouse 分数和通用最佳实践，没有 trace、代码位置和根因映射。",
+        "没有记录浏览器、网络、CPU、缓存和重复次数就比较指标。",
+        "方案没有说明共享组件、路由、用户群、回归和发布影响。",
+        "分析团队直接修改了业务代码。"
+      ],
+      "expectedWorkflow": "full-performance-assessment",
+      "expectedProfile": "standard",
+      "minimumVerificationLevel": "V3",
+      "expectedRolePlan": {
+        "active": [
+          "performance-lead",
+          "source-performance-analyst",
+          "browser-performance-engineer",
+          "rendering-performance-specialist",
+          "loading-performance-specialist",
+          "performance-solution-architect",
+          "performance-evidence-reviewer"
+        ],
+        "consulted": [
+          "field-performance-analyst"
+        ],
+        "notApplicable": []
+      }
+    },
+    {
+      "id": "ssr-hydration-regression-diagnosis",
+      "input": "用户说明某次发布后 SSR 页面 LCP 与首次交互明显回退，提供好坏版本源码、目标 URL 和部分 RUM 版本分群。",
+      "expectedOutputs": [
+        "performance-metrics-baseline.md",
+        "static-analysis-findings.md",
+        "runtime-profile-findings.md",
+        "root-cause-map.md",
+        "performance-analysis-report.md"
+      ],
+      "mustPassGates": [
+        "context-gate",
+        "reproducibility-gate",
+        "metric-integrity-gate",
+        "evidence-gate",
+        "attribution-gate",
+        "verification-gate",
+        "delivery-gate"
+      ],
+      "failureExamples": [
+        "好坏版本的缓存、网络或数据条件不可比却直接归因代码提交。",
+        "把 RUM 时间相关性直接写成 Hydration 因果结论。",
+        "只检查客户端 bundle，忽略 TTFB、服务端数据和重复请求。",
+        "没有替代解释和最小验证实验。"
+      ],
+      "expectedWorkflow": "performance-regression-diagnosis",
+      "expectedProfile": "assurance",
+      "minimumVerificationLevel": "V3",
+      "expectedRolePlan": {
+        "active": [
+          "performance-lead",
+          "source-performance-analyst",
+          "browser-performance-engineer",
+          "rendering-performance-specialist",
+          "loading-performance-specialist",
+          "field-performance-analyst",
+          "performance-evidence-reviewer"
+        ],
+        "consulted": [],
+        "notApplicable": [
+          "performance-solution-architect"
+        ]
+      }
+    },
+    {
+      "id": "mobile-lcp-loading-solution",
+      "input": "用户已有移动端落地页的 LCP、waterfall 和静态分析结果，要求设计最适合的加载优化方案、影响范围和落地节奏。",
+      "expectedOutputs": [
+        "root-cause-map.md",
+        "impact-scope-matrix.md",
+        "optimization-solution.md",
+        "rollout-roadmap.md",
+        "implementation-handoff.md"
+      ],
+      "mustPassGates": [
+        "evidence-gate",
+        "attribution-gate",
+        "impact-scope-gate",
+        "solution-fit-gate",
+        "verification-gate",
+        "handoff-gate",
+        "delivery-gate"
+      ],
+      "failureExamples": [
+        "默认建议 preload 全部资源，没有关键请求链证据。",
+        "只看图片体积，没有分解 TTFB、发现、下载和渲染延迟。",
+        "缓存方案没有版本失效、回滚和 CDN 影响。",
+        "实施交接没有验收指标和回归范围。"
+      ],
+      "expectedWorkflow": "performance-solution-design",
+      "expectedProfile": "standard",
+      "minimumVerificationLevel": "V2",
+      "expectedRolePlan": {
+        "active": [
+          "performance-lead",
+          "source-performance-analyst",
+          "loading-performance-specialist",
+          "performance-solution-architect",
+          "performance-evidence-reviewer"
+        ],
+        "consulted": [
+          "browser-performance-engineer",
+          "field-performance-analyst"
+        ],
+        "notApplicable": [
+          "rendering-performance-specialist"
+        ]
+      }
+    },
+    {
+      "id": "browser-access-unavailable-degradation",
+      "input": "用户提供项目源码和一个需要生产认证但未授权访问的 URL，仍要求团队给出性能分析。",
+      "expectedOutputs": [
+        "performance-brief.md",
+        "measurement-plan.md",
+        "static-analysis-findings.md",
+        "performance-analysis-report.md"
+      ],
+      "mustPassGates": [
+        "role-activation-gate",
+        "context-gate",
+        "static-analysis-gate",
+        "evidence-gate",
+        "verification-gate",
+        "delivery-gate"
+      ],
+      "failureExamples": [
+        "未获授权却尝试登录生产系统。",
+        "伪造浏览器指标或声称已完成运行时验证。",
+        "把静态风险直接写成真实性能根因。",
+        "没有列出恢复 V3 所需的最小访问和测量条件。"
+      ],
+      "expectedWorkflow": "full-performance-assessment",
+      "expectedProfile": "assurance",
+      "minimumVerificationLevel": "V1",
+      "expectedRolePlan": {
+        "active": [
+          "performance-lead",
+          "source-performance-analyst",
+          "performance-evidence-reviewer"
+        ],
+        "consulted": [
+          "browser-performance-engineer",
+          "performance-solution-architect"
+        ],
+        "notApplicable": [
+          "rendering-performance-specialist",
+          "loading-performance-specialist",
+          "field-performance-analyst"
+        ]
+      }
+    },
+    {
+      "id": "analysis-to-ai-work-team-handoff",
+      "input": "用户已有完整性能报告和推荐方案，要求复核后形成可交给 ai-work-team 的实施上下文，但暂不执行代码修改。",
+      "expectedOutputs": [
+        "performance-analysis-report.md",
+        "impact-scope-matrix.md",
+        "rollout-roadmap.md",
+        "implementation-handoff.md"
+      ],
+      "mustPassGates": [
+        "evidence-gate",
+        "impact-scope-gate",
+        "verification-gate",
+        "handoff-gate",
+        "delivery-gate"
+      ],
+      "failureExamples": [
+        "没有用户批准就自动调用实现团队修改代码。",
+        "交接包没有代码版本、根因证据、验收指标和回归面。",
+        "把预期收益写成已实现收益。",
+        "没有要求实施团队重新确认当前代码状态。"
+      ],
+      "expectedWorkflow": "performance-analysis-delivery",
+      "expectedProfile": "standard",
+      "minimumVerificationLevel": "V2",
+      "expectedRolePlan": {
+        "active": [
+          "performance-lead",
+          "performance-solution-architect",
+          "performance-evidence-reviewer"
+        ],
+        "consulted": [],
+        "notApplicable": [
+          "source-performance-analyst",
+          "browser-performance-engineer",
+          "rendering-performance-specialist",
+          "loading-performance-specialist",
+          "field-performance-analyst"
+        ]
+      }
+    }
+  ],
+  "dataContracts": [
+    {
+      "source": "前端源码、依赖、构建配置与产物",
+      "freshness": "必须对应本次分析的代码版本、分支或提交；版本变化后重新核对静态发现。",
+      "requiredFields": [
+        "项目或仓库标识",
+        "代码版本",
+        "框架与渲染模式",
+        "构建入口与目标环境",
+        "依赖与锁文件状态",
+        "关键路由或用户旅程"
+      ],
+      "missingDataPolicy": "缺少版本或构建上下文时，只能输出带假设的局部静态风险，不能声称覆盖生产代码。",
+      "allowedUse": [
+        "应用与构建建模",
+        "静态性能分析",
+        "源码到运行时证据映射",
+        "影响范围和实施交接"
+      ]
+    },
+    {
+      "source": "受控浏览器测量与原始性能证据",
+      "freshness": "必须来自当前目标版本和记录过的环境；URL、版本、浏览器或运行条件变化后失效。",
+      "requiredFields": [
+        "URL 与用户旅程",
+        "代码或部署版本",
+        "浏览器与设备",
+        "网络与 CPU 条件",
+        "缓存与认证状态",
+        "采样时间与重复次数",
+        "指标值与单位",
+        "原始证据引用"
+      ],
+      "missingDataPolicy": "浏览器证据不可用时将运行时结论降级为 V1 假设，输出测量计划和恢复条件。",
+      "allowedUse": [
+        "实验室性能基线",
+        "加载、交互、渲染和内存归因",
+        "版本对比",
+        "方案验证设计"
+      ]
+    },
+    {
+      "source": "RUM、Web Vitals、APM 与业务现场指标",
+      "freshness": "必须说明查询窗口、数据延迟、采样率、SDK 或口径版本；口径或发布变化后重新建立基线。",
+      "requiredFields": [
+        "指标定义与单位",
+        "时间窗口与时区",
+        "样本量与采样率",
+        "p50、p75 或 p95",
+        "路由、设备、网络、浏览器或版本分群",
+        "数据来源与口径版本"
+      ],
+      "missingDataPolicy": "缺少样本量、版本或关键分群时不输出真实用户覆盖率或收益结论；无数据时仅给监控计划。",
+      "allowedUse": [
+        "现场性能基线",
+        "用户与版本分群",
+        "业务影响假设",
+        "灰度与上线收益复盘"
+      ]
+    },
+    {
+      "source": "性能目标、业务旅程与工程约束",
+      "freshness": "每次范围、用户、发布窗口、性能预算或架构约束变化后重新确认。",
+      "requiredFields": [
+        "关键用户旅程",
+        "目标用户与设备范围",
+        "当前基线与目标预算",
+        "可接受变更范围",
+        "发布与回滚约束",
+        "成功和停止条件"
+      ],
+      "missingDataPolicy": "缺少旅程或目标预算时先完成 intake，不能直接选定最适合方案。",
+      "allowedUse": [
+        "分析范围",
+        "方案优先级",
+        "影响范围",
+        "落地路线图",
+        "实施验收"
+      ]
+    },
+    {
+      "source": "第三方工具摘要、Lighthouse 报告、HAR、trace 或用户提供截图",
+      "freshness": "必须记录生成时间、目标版本、工具版本、环境和原始文件来源。",
+      "requiredFields": [
+        "工具或文件类型",
+        "目标 URL 与版本",
+        "采集环境",
+        "生成时间",
+        "原始文件或证据 ID",
+        "已知限制"
+      ],
+      "missingDataPolicy": "只有截图或综合分数且无原始环境时，仅用作线索，不作为根因或收益的直接证据。",
+      "allowedUse": [
+        "假设生成",
+        "证据补充",
+        "测量计划设计",
+        "受限条件下的报告复核"
+      ]
+    }
+  ],
+  "capabilityMatrix": [
+    {
+      "capability": "性能场景建模与测量设计",
+      "owner": "performance-lead",
+      "inputs": [
+        "性能现象",
+        "项目或 URL",
+        "关键用户旅程",
+        "业务与技术约束"
+      ],
+      "outputs": [
+        "performance-brief",
+        "measurement-plan",
+        "rolePlan"
+      ],
+      "gates": [
+        "role-activation-gate",
+        "context-gate",
+        "reproducibility-gate"
+      ],
+      "maturity": "usable"
+    },
+    {
+      "capability": "前端源码与构建性能静态分析",
+      "owner": "source-performance-analyst",
+      "inputs": [
+        "源码",
+        "构建配置",
+        "依赖与产物",
+        "关键旅程"
+      ],
+      "outputs": [
+        "static-analysis-findings",
+        "code-impact-map",
+        "runtime-hypotheses"
+      ],
+      "gates": [
+        "static-analysis-gate",
+        "attribution-gate"
+      ],
+      "maturity": "usable"
+    },
+    {
+      "capability": "真实浏览器受控测量与运行时剖析",
+      "owner": "browser-performance-engineer",
+      "inputs": [
+        "URL 或可运行应用",
+        "复现步骤",
+        "环境矩阵",
+        "访问授权"
+      ],
+      "outputs": [
+        "runtime-profile-findings",
+        "browser-evidence-bundle",
+        "lab-metrics"
+      ],
+      "gates": [
+        "reproducibility-gate",
+        "runtime-evidence-gate",
+        "metric-integrity-gate"
+      ],
+      "maturity": "usable"
+    },
+    {
+      "capability": "渲染、交互与 Hydration 归因",
+      "owner": "rendering-performance-specialist",
+      "inputs": [
+        "trace",
+        "Event Timing",
+        "组件与状态源码",
+        "渲染指标"
+      ],
+      "outputs": [
+        "rendering-root-cause-analysis",
+        "interaction-impact-map"
+      ],
+      "gates": [
+        "runtime-evidence-gate",
+        "attribution-gate"
+      ],
+      "maturity": "usable"
+    },
+    {
+      "capability": "加载、资源、缓存与网络归因",
+      "owner": "loading-performance-specialist",
+      "inputs": [
+        "waterfall",
+        "Resource Timing",
+        "构建产物",
+        "响应头与部署约束"
+      ],
+      "outputs": [
+        "loading-critical-path",
+        "resource-impact-map"
+      ],
+      "gates": [
+        "static-analysis-gate",
+        "runtime-evidence-gate",
+        "attribution-gate"
+      ],
+      "maturity": "usable"
+    },
+    {
+      "capability": "现场指标、分位数与用户分群分析",
+      "owner": "field-performance-analyst",
+      "inputs": [
+        "RUM 或 APM",
+        "指标口径",
+        "版本与分群",
+        "业务护栏"
+      ],
+      "outputs": [
+        "field-metrics-baseline",
+        "segment-analysis",
+        "monitoring-plan"
+      ],
+      "gates": [
+        "metric-integrity-gate",
+        "evidence-gate",
+        "verification-gate"
+      ],
+      "maturity": "usable"
+    },
+    {
+      "capability": "优化方案、影响范围与落地路线图",
+      "owner": "performance-solution-architect",
+      "inputs": [
+        "根因图谱",
+        "证据索引",
+        "项目约束",
+        "性能目标"
+      ],
+      "outputs": [
+        "optimization-solution",
+        "impact-scope-matrix",
+        "rollout-roadmap",
+        "implementation-handoff"
+      ],
+      "gates": [
+        "impact-scope-gate",
+        "solution-fit-gate",
+        "handoff-gate"
+      ],
+      "maturity": "usable"
+    },
+    {
+      "capability": "独立证据复核与结论等级控制",
+      "owner": "performance-evidence-reviewer",
+      "inputs": [
+        "性能报告",
+        "原始证据",
+        "根因图谱",
+        "方案与影响范围"
+      ],
+      "outputs": [
+        "evidence-review",
+        "verification-boundary",
+        "delivery-gate-result"
+      ],
+      "gates": [
+        "evidence-gate",
+        "verification-gate",
+        "delivery-gate"
+      ],
+      "maturity": "usable"
+    }
+  ],
+  "plannedFiles": [
+    "SKILL.md",
+    "README.md",
+    "README_EN.md",
+    "evaluation-report.md",
+    "package.json",
+    "skill-runtime.json",
+    "generation-report.json",
+    "commands/README.md",
+    "commands/perf-team.md",
+    "docs/README.md",
+    "docs/quality-gates.md",
+    "docs/quality-rubrics.md",
+    "docs/handoff-contract.md",
+    "docs/team-operating-model.md",
+    "docs/execution-methodology.md",
+    "docs/verification-methodology.md",
+    "docs/role-activation-methodology.md",
+    "docs/capability-matrix.md",
+    "docs/acceptance-scenarios.md",
+    "docs/integrations/data-contracts.md",
+    "external-cli/README.md",
+    "external-skills/README.md",
+    "external-skills/catalog.json",
+    "external-skills/install-policy.md",
+    "external-skills/role-map.md",
+    "external-skills/adapters.json",
+    "members/README.md",
+    "scripts/validate-structure.js",
+    "scripts/validate-contracts.js",
+    "scripts/list-external-skills.js",
+    "scripts/install-external-skills.js",
+    "scripts/run-acceptance-scenarios.js",
+    "workflows/README.md",
+    "workflows/route-table.md",
+    "workflows/execution-protocol.md",
+    "workspace/README.md",
+    "assets/templates/workflow-status.json",
+    "assets/templates/decision-log.md",
+    "assets/templates/risk-register.md",
+    "assets/templates/role-handoff.md",
+    "assets/templates/evidence-index.md",
+    "assets/templates/delivery-summary.md",
+    "schemas/member.schema.json",
+    "schemas/workflow.schema.json",
+    "schemas/command.schema.json",
+    "schemas/status.schema.json",
+    "schemas/skill-runtime.schema.json",
+    "members/performance-lead.md",
+    "members/source-performance-analyst.md",
+    "members/browser-performance-engineer.md",
+    "members/rendering-performance-specialist.md",
+    "members/loading-performance-specialist.md",
+    "members/field-performance-analyst.md",
+    "members/performance-solution-architect.md",
+    "members/performance-evidence-reviewer.md",
+    "workflows/performance-intake.md",
+    "workflows/full-performance-assessment.md",
+    "workflows/performance-regression-diagnosis.md",
+    "workflows/performance-solution-design.md",
+    "workflows/performance-analysis-delivery.md",
+    "docs/methodologies/performance-analysis-methodology.md",
+    "docs/methodologies/static-code-analysis-methodology.md",
+    "docs/methodologies/browser-measurement-methodology.md",
+    "docs/methodologies/performance-metrics-methodology.md",
+    "docs/methodologies/solution-prioritization-methodology.md",
+    "docs/engineering-standards/performance-evidence-standard.md",
+    "docs/engineering-standards/impact-scope-standard.md",
+    "docs/engineering-standards/performance-report-standard.md",
+    "docs/integrations/browser-capability-contract.md",
+    "docs/integrations/rum-observability-contract.md",
+    "docs/integrations/ai-work-team-handoff-contract.md",
+    "assets/templates/performance-brief.md",
+    "assets/templates/measurement-plan.md",
+    "assets/templates/performance-metrics-baseline.md",
+    "assets/templates/static-analysis-findings.md",
+    "assets/templates/runtime-profile-findings.md",
+    "assets/templates/root-cause-map.md",
+    "assets/templates/impact-scope-matrix.md",
+    "assets/templates/optimization-solution.md",
+    "assets/templates/rollout-roadmap.md",
+    "assets/templates/implementation-handoff.md",
+    "assets/templates/performance-analysis-report.md"
+  ]
+}

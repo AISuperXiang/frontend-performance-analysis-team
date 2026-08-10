@@ -1,0 +1,58 @@
+{
+  "version": "0.1.0",
+  "updatedAt": "2026-08-10",
+  "adapters": [
+    {
+      "id": "browser-runtime-inspection-adapter",
+      "skill": "browser-runtime-inspection",
+      "provider": "TRAE built-in browser automation capability",
+      "inputSchema": [
+        "urlOrLocalAccess",
+        "userJourney",
+        "allowedActions",
+        "authBoundary",
+        "browserEnvironment",
+        "networkAndCpuProfile",
+        "cachePolicy",
+        "repeatCount"
+      ],
+      "outputSchema": [
+        "executedSteps",
+        "environmentRecord",
+        "metricSamples",
+        "networkEvidence",
+        "runtimeEvidence",
+        "screenshots",
+        "errorsAndLimitations"
+      ],
+      "auth": "user-approval",
+      "fallback": "未授权或浏览器能力不可用时，读取用户提供的 trace、HAR、Lighthouse 或截图；若仍无运行时证据，则只交付静态 V1 结论和测量计划。",
+      "verifyCommand": "node scripts/list-external-skills.js --role browser-performance-engineer --query browser"
+    },
+    {
+      "id": "implementation-delivery-team-adapter",
+      "skill": "implementation-delivery-team",
+      "provider": "local or installed ai-work-team skill",
+      "inputSchema": [
+        "approvedImplementationHandoff",
+        "projectPath",
+        "currentCodeVersion",
+        "priorityAndMilestones",
+        "acceptanceMetrics",
+        "impactScope",
+        "rollbackAndStopConditions"
+      ],
+      "outputSchema": [
+        "implementationPlan",
+        "codeChanges",
+        "testEvidence",
+        "browserRemeasurement",
+        "deliverySummary",
+        "remainingRisks"
+      ],
+      "auth": "user-approval",
+      "fallback": "未获用户批准时只保留 implementation-handoff 和 rollout-roadmap，不调用实现团队、不修改代码。",
+      "verifyCommand": "node scripts/list-external-skills.js --role performance-solution-architect --query implementation"
+    }
+  ]
+}

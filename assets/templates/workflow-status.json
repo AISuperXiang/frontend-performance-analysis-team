@@ -1,0 +1,389 @@
+{
+  "workflow": "",
+  "requirementFolder": "",
+  "complexityLevel": "L",
+  "executionProfile": "standard",
+  "verificationLevel": "V0",
+  "targetVerificationLevel": "V3",
+  "currentStage": "",
+  "blockers": [],
+  "uncoveredRisks": [],
+  "updatedAt": "",
+  "rolePlan": [
+    {
+      "role": "performance-lead",
+      "mode": "not_applicable",
+      "reason": "Template: decide this role's applicability before execution.",
+      "stages": []
+    },
+    {
+      "role": "source-performance-analyst",
+      "mode": "not_applicable",
+      "reason": "Template: decide this role's applicability before execution.",
+      "stages": []
+    },
+    {
+      "role": "browser-performance-engineer",
+      "mode": "not_applicable",
+      "reason": "Template: decide this role's applicability before execution.",
+      "stages": []
+    },
+    {
+      "role": "rendering-performance-specialist",
+      "mode": "not_applicable",
+      "reason": "Template: decide this role's applicability before execution.",
+      "stages": []
+    },
+    {
+      "role": "loading-performance-specialist",
+      "mode": "not_applicable",
+      "reason": "Template: decide this role's applicability before execution.",
+      "stages": []
+    },
+    {
+      "role": "field-performance-analyst",
+      "mode": "not_applicable",
+      "reason": "Template: decide this role's applicability before execution.",
+      "stages": []
+    },
+    {
+      "role": "performance-solution-architect",
+      "mode": "not_applicable",
+      "reason": "Template: decide this role's applicability before execution.",
+      "stages": []
+    },
+    {
+      "role": "performance-evidence-reviewer",
+      "mode": "not_applicable",
+      "reason": "Template: decide this role's applicability before execution.",
+      "stages": []
+    }
+  ],
+  "stages": [
+    {
+      "name": "性能场景受理与测量设计 / Scene Intake",
+      "owner": "performance-lead",
+      "status": "pending",
+      "gates": [
+        "role-activation-gate",
+        "context-gate"
+      ],
+      "artifacts": [
+        "performance-brief.md",
+        "workflow-status.json"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "性能场景受理与测量设计 / Measurement Design",
+      "owner": "browser-performance-engineer",
+      "status": "pending",
+      "gates": [
+        "reproducibility-gate",
+        "metric-integrity-gate"
+      ],
+      "artifacts": [
+        "measurement-plan.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "前端性能完整评估 / Scope And Baseline",
+      "owner": "performance-lead",
+      "status": "pending",
+      "gates": [
+        "role-activation-gate",
+        "context-gate"
+      ],
+      "artifacts": [
+        "performance-brief.md",
+        "performance-metrics-baseline.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "前端性能完整评估 / Static Analysis",
+      "owner": "source-performance-analyst",
+      "status": "pending",
+      "gates": [
+        "static-analysis-gate"
+      ],
+      "artifacts": [
+        "static-analysis-findings.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "前端性能完整评估 / Browser Measurement",
+      "owner": "browser-performance-engineer",
+      "status": "pending",
+      "gates": [
+        "reproducibility-gate",
+        "runtime-evidence-gate"
+      ],
+      "artifacts": [
+        "runtime-profile-findings.md",
+        "performance-metrics-baseline.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "前端性能完整评估 / Specialist Attribution",
+      "owner": "rendering-performance-specialist",
+      "status": "pending",
+      "gates": [
+        "attribution-gate"
+      ],
+      "artifacts": [
+        "root-cause-map.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "前端性能完整评估 / Field Validation",
+      "owner": "field-performance-analyst",
+      "status": "pending",
+      "gates": [
+        "metric-integrity-gate",
+        "evidence-gate"
+      ],
+      "artifacts": [
+        "performance-metrics-baseline.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "前端性能完整评估 / Solution And Scope",
+      "owner": "performance-solution-architect",
+      "status": "pending",
+      "gates": [
+        "impact-scope-gate",
+        "solution-fit-gate",
+        "handoff-gate"
+      ],
+      "artifacts": [
+        "impact-scope-matrix.md",
+        "optimization-solution.md",
+        "rollout-roadmap.md",
+        "implementation-handoff.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "前端性能完整评估 / Independent Review",
+      "owner": "performance-evidence-reviewer",
+      "status": "pending",
+      "gates": [
+        "verification-gate"
+      ],
+      "artifacts": [
+        "evidence-review.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "前端性能完整评估 / Analysis Delivery",
+      "owner": "performance-lead",
+      "status": "pending",
+      "gates": [
+        "delivery-gate"
+      ],
+      "artifacts": [
+        "performance-analysis-report.md",
+        "delivery-summary.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "性能回退诊断 / Regression Contract",
+      "owner": "performance-lead",
+      "status": "pending",
+      "gates": [
+        "role-activation-gate",
+        "context-gate"
+      ],
+      "artifacts": [
+        "performance-brief.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "性能回退诊断 / Controlled Comparison",
+      "owner": "browser-performance-engineer",
+      "status": "pending",
+      "gates": [
+        "reproducibility-gate",
+        "metric-integrity-gate"
+      ],
+      "artifacts": [
+        "performance-metrics-baseline.md",
+        "runtime-profile-findings.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "性能回退诊断 / Change And Field Correlation",
+      "owner": "source-performance-analyst",
+      "status": "pending",
+      "gates": [
+        "evidence-gate"
+      ],
+      "artifacts": [
+        "static-analysis-findings.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "性能回退诊断 / Root Cause Ranking",
+      "owner": "rendering-performance-specialist",
+      "status": "pending",
+      "gates": [
+        "attribution-gate"
+      ],
+      "artifacts": [
+        "root-cause-map.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "性能回退诊断 / Regression Review",
+      "owner": "performance-evidence-reviewer",
+      "status": "pending",
+      "gates": [
+        "verification-gate"
+      ],
+      "artifacts": [
+        "evidence-review.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "性能回退诊断 / Diagnosis Delivery",
+      "owner": "performance-lead",
+      "status": "pending",
+      "gates": [
+        "delivery-gate"
+      ],
+      "artifacts": [
+        "performance-analysis-report.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "性能优化方案与落地节奏设计 / Evidence Lock",
+      "owner": "performance-lead",
+      "status": "pending",
+      "gates": [
+        "role-activation-gate",
+        "evidence-gate",
+        "attribution-gate"
+      ],
+      "artifacts": [
+        "root-cause-map.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "性能优化方案与落地节奏设计 / Option Design",
+      "owner": "performance-solution-architect",
+      "status": "pending",
+      "gates": [
+        "solution-fit-gate"
+      ],
+      "artifacts": [
+        "optimization-solution.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "性能优化方案与落地节奏设计 / Impact Mapping",
+      "owner": "source-performance-analyst",
+      "status": "pending",
+      "gates": [
+        "impact-scope-gate"
+      ],
+      "artifacts": [
+        "impact-scope-matrix.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "性能优化方案与落地节奏设计 / Roadmap And Handoff",
+      "owner": "performance-solution-architect",
+      "status": "pending",
+      "gates": [
+        "handoff-gate"
+      ],
+      "artifacts": [
+        "rollout-roadmap.md",
+        "implementation-handoff.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "性能优化方案与落地节奏设计 / Solution Review",
+      "owner": "performance-evidence-reviewer",
+      "status": "pending",
+      "gates": [
+        "verification-gate"
+      ],
+      "artifacts": [
+        "evidence-review.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "性能优化方案与落地节奏设计 / Solution Delivery",
+      "owner": "performance-lead",
+      "status": "pending",
+      "gates": [
+        "delivery-gate"
+      ],
+      "artifacts": [
+        "delivery-summary.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "性能分析复核与实施交接 / Evidence Audit",
+      "owner": "performance-evidence-reviewer",
+      "status": "pending",
+      "gates": [
+        "evidence-gate",
+        "verification-gate"
+      ],
+      "artifacts": [
+        "evidence-review.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "性能分析复核与实施交接 / Handoff Audit",
+      "owner": "performance-solution-architect",
+      "status": "pending",
+      "gates": [
+        "impact-scope-gate",
+        "handoff-gate"
+      ],
+      "artifacts": [
+        "impact-scope-matrix.md",
+        "rollout-roadmap.md",
+        "implementation-handoff.md"
+      ],
+      "evidence": []
+    },
+    {
+      "name": "性能分析复核与实施交接 / Final Delivery",
+      "owner": "performance-lead",
+      "status": "pending",
+      "gates": [
+        "delivery-gate"
+      ],
+      "artifacts": [
+        "performance-analysis-report.md",
+        "delivery-summary.md"
+      ],
+      "evidence": []
+    }
+  ]
+}

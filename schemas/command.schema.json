@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Frontend Performance Analysis Team Command",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "triggers",
+    "members",
+    "execution_mode"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "triggers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "members": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "execution_mode": {
+      "type": "string",
+      "enum": [
+        "sequential",
+        "hybrid"
+      ]
+    }
+  },
+  "additionalProperties": true
+}
